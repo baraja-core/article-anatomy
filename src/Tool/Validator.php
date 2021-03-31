@@ -40,7 +40,7 @@ final class Validator
 				'Haystack is not valid article. Did you mean this required scheme?'
 				. "\n\n" . self::SCHEME
 				. "\n\n" . 'Original parse message: ' . $e->getMessage(),
-				previous: $e
+				previous: $e,
 			);
 		}
 

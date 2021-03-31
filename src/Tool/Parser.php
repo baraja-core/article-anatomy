@@ -47,8 +47,8 @@ final class Parser
 		$decoded = Neon::decode(
 			implode("\n", array_map(
 				static fn(string $item): string => ltrim($item, '> '),
-				explode("\n", $meta)
-			))
+				explode("\n", $meta),
+			)),
 		);
 
 		return is_array($decoded) ? $decoded : null;
