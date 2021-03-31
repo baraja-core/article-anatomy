@@ -1,0 +1,35 @@
+{
+	"name": "baraja-core/article-anatomy",
+	"description": "Elegant tool for easy validation of the markdown article format and parsing to a structured entity.",
+	"homepage": "https://github.com/baraja-core/article-anatomy",
+	"authors": [
+		{
+			"name": "Jan Barášek",
+			"homepage": "https://php.baraja.cz"
+		}
+	],
+	"require": {
+		"php": "^8.0",
+		"baraja-core/simple-php-diff": "^1.0",
+		"nette/neon": "^3.2"
+	},
+	"require-dev": {
+		"phpstan/phpstan": "^0.12.74",
+		"tracy/tracy": "^2.8",
+		"phpstan/phpstan-nette": "^0.12.14",
+		"spaze/phpstan-disallowed-calls": "^1.1",
+		"roave/security-advisories": "dev-master",
+		"jetbrains/phpstorm-attributes": "^1.0"
+	},
+	"autoload": {
+		"classmap": [
+			"src/"
+		]
+	},
+	"scripts": {
+		"phpstan": [
+			"vendor/bin/phpstan analyse src -c phpstan.neon --level 8 --no-progress"
+		]
+	},
+	"minimum-stability": "stable"
+}
