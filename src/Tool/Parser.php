@@ -12,12 +12,15 @@ final class Parser
 {
 	public function parse(string $haystack): Structure
 	{
-		if (!preg_match('/^(.+)\n===+\n+((?:>\s+[^\n]+\n)+)?((?:.|\n)+)$/', $this->normalize($haystack), $contentParser)) {
+		$haystack = $this->normalize($haystack);
+		if (!preg_match('/^(.+)\n===+\n+((?:>\s+[^\n]+\n)+)?((?:.|\n){1,20})/', $haystack, $fastParser)) {
 			throw new \InvalidArgumentException(
 				'Invalid article format, please use ArticleAnatomy::validate() for debug your content.',
 			);
 		}
-		[, $title, $metaString, $content] = $contentParser;
+		[$matched, $title, $metaString, $contentStart] = $fastParser;
+		$content = $contentStart . str_replace($matched, '', $haystack);
+
 		$meta = $this->parseMeta(trim($metaString));
 		if ($meta === null) {
 			$meta = [];
