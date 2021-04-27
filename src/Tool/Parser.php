@@ -20,6 +20,10 @@ final class Parser
 		}
 		[$matched, $title, $metaString, $contentStart] = $fastParser;
 		$content = $contentStart . str_replace($matched, '', $haystack);
+		if (!preg_match('/^>\s[a-zA-Z0-9_-]+:/', $metaString)) {
+			$content = $metaString . $content;
+			$metaString = '';
+		}
 
 		$meta = $this->parseMeta(trim($metaString));
 		if ($meta === null) {
