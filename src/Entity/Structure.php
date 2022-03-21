@@ -39,7 +39,7 @@ final class Structure
 
 
 	/**
-	 * @return string[]
+	 * @return array<string, string>
 	 */
 	public function getMeta(): array
 	{

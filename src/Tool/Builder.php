@@ -25,7 +25,7 @@ final class Builder
 
 
 	/**
-	 * @param mixed[] $meta
+	 * @param array<string, string> $meta
 	 */
 	private function meta(array $meta): string
 	{

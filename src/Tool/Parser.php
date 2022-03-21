@@ -13,14 +13,14 @@ final class Parser
 	public function parse(string $haystack): Structure
 	{
 		$haystack = $this->normalize($haystack);
-		if (!preg_match('/^(.+)\n===+\n+((?:>\s+[^\n]+\n)+)?((?:.|\n){1,20})/', $haystack, $fastParser)) {
+		if (!preg_match('/^(.+)\n===+\n+((?:>\s+[^\n]+\n)+)?((?:.|\n){1,20})/', $haystack, $fastParser) === 1) {
 			throw new \InvalidArgumentException(
 				'Invalid article format, please use ArticleAnatomy::validate() for debug your content.',
 			);
 		}
 		[$matched, $title, $metaString, $contentStart] = $fastParser;
 		$content = $contentStart . str_replace($matched, '', $haystack);
-		if (!preg_match('/^>\s[a-zA-Z0-9_-]+:/', $metaString)) {
+		if (preg_match('/^>\s[a-zA-Z0-9_-]+:/', $metaString) !== 1) {
 			$content = $metaString . $content;
 			$metaString = '';
 		}
