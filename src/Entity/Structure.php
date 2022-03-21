@@ -15,7 +15,7 @@ final class Structure
 		private string $title,
 		private ?string $perex,
 		private array $meta,
-		private string $content
+		private string $content,
 	) {
 	}
 

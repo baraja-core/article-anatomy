@@ -12,7 +12,7 @@ final class ValidatorException extends \InvalidArgumentException
 	public function __construct(
 		string $message = '',
 		private ?Diff $diff = null,
-		?\Throwable $previous = null
+		?\Throwable $previous = null,
 	) {
 		parent::__construct($message, 500, $previous);
 	}
