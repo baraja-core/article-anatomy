@@ -12,9 +12,14 @@ final class Builder
 {
 	public function build(Structure $structure): string
 	{
-		return $this->title($structure->getTitle())
-			. ($structure->getMeta() ? "\n\n" . $this->meta($structure->getMeta()) : '')
-			. "\n\n" . $structure->getContent() . "\n";
+		return sprintf(
+			"%s%s\n\n%s\n",
+			$this->title($structure->getTitle()),
+			$structure->getMeta() !== []
+				? "\n\n" . $this->meta($structure->getMeta())
+				: '',
+			$structure->getContent()
+		);
 	}
 
 

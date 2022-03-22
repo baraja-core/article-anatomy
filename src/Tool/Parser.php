@@ -13,7 +13,7 @@ final class Parser
 	public function parse(string $haystack): Structure
 	{
 		$haystack = $this->normalize($haystack);
-		if (!preg_match('/^(.+)\n===+\n+((?:>\s+[^\n]+\n)+)?((?:.|\n){1,20})/', $haystack, $fastParser) === 1) {
+		if (preg_match('/^(.+)\n===+\n+((?:>\s+[^\n]+\n)+)?((?:.|\n){1,20})/', $haystack, $fastParser) !== 1) {
 			throw new \InvalidArgumentException(
 				'Invalid article format, please use ArticleAnatomy::validate() for debug your content.',
 			);
@@ -70,8 +70,9 @@ final class Parser
 	{
 		$s = trim($s);
 		// convert to compressed normal form (NFC)
-		if (class_exists('Normalizer', false) && ($n = \Normalizer::normalize($s, \Normalizer::FORM_C)) !== false) {
-			$s = (string) $n;
+		if (class_exists('Normalizer', false)) {
+			$n = \Normalizer::normalize($s, \Normalizer::FORM_C);
+			$s = $n !== false ? $n : $s;
 		}
 
 		$s = str_replace(["\r\n", "\r"], "\n", $s);
